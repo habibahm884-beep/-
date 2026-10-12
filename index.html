@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𝑽𝒆𝒍𝒗𝒆𝒕 𝑩𝒆𝒂𝒖𝒕𝒚</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #fcf6f2;
+            color: #4a3b32;
+            overflow-x: hidden;
+        }
+
+        /* رسالة التنبيه العلوية */
+        #toast {
+            position: fixed;
+            top: -70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #9c6c66, #7d524b);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 8px 25px rgba(156, 108, 102, 0.3);
+            transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+        }
+
+        #toast.show {
+            top: 25px;
+        }
+
+        /* Navbar الفاخر */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(252, 246, 242, 0.9);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(176, 125, 118, 0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #4a3b32;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a3b32;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #b07d76;
+        }
+
+        .cart-btn {
+            background: linear-gradient(135deg, #9c6c66, #845752);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(156, 108, 102, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(156, 108, 102, 0.35);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 8%;
+            min-height: 82vh;
+            background: linear-gradient(rgba(252, 246, 242, 0.85), rgba(252, 246, 242, 0.85));
+        }
+
+        .hero-content {
+            max-width: 550px;
+        }
+
+        .hero-subtitle {
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: #b07d76;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            line-height: 1.1;
+            color: #4a3b32;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 16px;
+            color: #6b5850;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
+        .explore-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #9c6c66, #7d524b);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            box-shadow: 0 6px 20px rgba(156, 108, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(156, 108, 102, 0.4);
+        }
+
+        /* المربع الأنيق بجانب الهيرو */
+        .hero-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .arch-box {
+            width: 500px;
+            height: 380px;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(156, 108, 102, 0.12);
+        }
+
+        .arch-inner-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 46px;
+            color: #593e38;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .arch-desc {
+            font-size: 15px;
+            letter-spacing: 1.5px;
+            color: #6b514a;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .arch-sub {
+            font-size: 13px;
+            color: #8c6d66;
+            font-style: italic;
+            margin-bottom: 25px;
+        }
+
+        .arch-icons {
+            display: flex;
+            gap: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #593e38;
+            letter-spacing: 1px;
+        }
+
+        /* أقسام المنتجات (باستخدام صورك المحلية تماماً) */
+        .products-section {
+            padding: 80px 8%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .sub-title {
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #b07d76;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: #4a3b32;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(156, 108, 102, 0.15);
+        }
+
+        .product-img-box {
+            width: 100%;
+            height: 320px;
+            background-color: #f7ede8;
+            overflow: hidden;
+        }
+
+        .product-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 22px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #593e38;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #9c6c66;
+            margin-bottom: 18px;
+        }
+
+        .add-bag-btn {
+            width: 100%;
+            background: transparent;
+            border: 2px solid #9c6c66;
+            color: #9c6c66;
+            padding: 12px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .add-bag-btn:hover {
+            background: linear-gradient(135deg, #9c6c66, #7d524b);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(74, 59, 50, 0.5);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .cart-content {
+            background: white;
+            padding: 35px;
+            width: 420px;
+            max-width: 90%;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .close-cart {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #7d6b63;
+        }
+
+        .cart-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #4a3b32;
+        }
+
+        #cart-items-container {
+            max-height: 220px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart-msg {
+            color: #999;
+            font-size: 14px;
+            text-align: center;
+            padding: 25px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0eae5;
+            font-size: 14px;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            color: #cc6666;
+        }
+
+        .cart-total-section {
+            border-top: 2px solid #fcf6f2;
+            padding-top: 18px;
+        }
+
+        .cart-total-section h3 {
+            font-size: 18px;
+            margin-bottom: 18px;
+            color: #4a3b32;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background-color: #1ebe5d;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- رسالة التنبيه الصغيرة -->
+    <div id="toast">Successfully added to bag! ✨</div>
+
+    <!-- Header -->
+    <header class="navbar">
+        <div class="logo">𝑽𝒆𝒍𝒗𝒆𝒕 𝑩𝒆𝒂𝒖𝒕𝒚 <span>⭐</span></div>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#rings">Rings</a>
+            <a href="#bracelets">Bracelets</a>
+        </nav>
+        <div class="cart-btn" onclick="toggleCart()">Bag (<span id="cart-count">0</span>)</div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <span class="hero-subtitle">A LITTLE SPARKLE, A LOT OF LOVE</span>
+            <h1>Beauty In Every Detail.</h1>
+            <p>Discover beautiful accessories designed to make every moment special. Find your favorite little sparkle with Velvet Beauty.</p>
+            <a href="#rings" class="explore-btn">Explore Collection</a>
+        </div>
+        <div class="hero-image-container">
+            <div class="arch-box">
+                <div class="arch-inner-content">
+                    <h2>𝑽𝒆𝒍𝒗𝒆𝒕 𝑩𝒆𝒂𝒖𝒕𝒚</h2>
+                    <p class="arch-desc">Makeup & Accessories</p>
+                    <p class="arch-sub">All the pretty things you love</p>
+                    <div class="arch-icons">
+                        <span>💄 MAKEUP</span>
+                        <span>🎀 ACCESSORIES</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rings Section (الصور الخاصة بكِ في مجلد images) -->
+    <section id="rings" class="products-section">
+        <div class="section-header">
+            <span class="sub-title">SIMPLE AND BEAUTIFUL</span>
+            <h2>Elegant Rings</h2>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-img-box"><img src="images/ring1.jpg" alt="Classic Ring"></div>
+                <div class="product-info">
+                    <h3>Classic Ring</h3>
+                    <p class="price">EGP 45</p>
+                    <button class="add-bag-btn" onclick="addToCart('Classic Ring', 45)">Add to Bag</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img-box"><img src="images/ring2.jpg" alt="Golden Ring"></div>
+                <div class="product-info">
+                    <h3>Golden Ring</h3>
+                    <p class="price">EGP 60</p>
+                    <button class="add-bag-btn" onclick="addToCart('Golden Ring', 60)">Add to Bag</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img-box"><img src="images/ring3.jpg" alt="pandora Ring"></div>
+                <div class="product-info">
+                    <h3>pandora Ring</h3>
+                    <p class="price">EGP 50</p>
+                    <button class="add-bag-btn" onclick="addToCart('pandora Ring', 50)">Add to Bag</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bracelets Section (صور الأساور الخاصة بكِ) -->
+    <section id="bracelets" class="products-section">
+        <div class="section-header">
+            <span class="sub-title">SIMPLE AND BEAUTIFUL</span>
+            <h2>Lovely Bracelets</h2>
+        </div>
+        <div class="products-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 750px; margin: 0 auto;">
+            <div class="product-card">
+                <div class="product-img-box"><img src="images/bracelet1.jpg" alt="Golden Bracelet"></div>
+                <div class="product-info">
+                    <h3>Golden Bracelet</h3>
+                    <p class="price">EGP 120</p>
+                    <button class="add-bag-btn" onclick="addToCart('Golden Bracelet', 120)">Add to Bag</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img-box"><img src="images/bracelet2.jpg" alt="Classic Bracelet"></div>
+                <div class="product-info">
+                    <h3>Classic Bracelet</h3>
+                    <p class="price">EGP 50</p>
+                    <button class="add-bag-btn" onclick="addToCart('Classic Bracelet', 50)">Add to Bag</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-content">
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
+            <h2>Your Shopping Bag</h2>
+            <div id="cart-items-container">
+                <p class="empty-cart-msg">Your bag is empty.</p>
+            </div>
+            <div class="cart-total-section">
+                <h3>Total: <span id="cart-total">EGP 0</span></h3>
+                <button class="checkout-btn" onclick="checkoutToWhatsApp()">Confirm Order via WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        let cart = [];
+
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartUI();
+            showToast();
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartTotal = document.getElementById('cart-total');
+
+            cartCount.textContent = cart.length;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your bag is empty.</p>';
+                cartTotal.textContent = 'EGP 0';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `
+                    <div class="cart-item">
+                        <span>${item.name}</span>
+                        <span>EGP ${item.price}</span>
+                        <button onclick="removeFromCart(${index})" class="remove-btn">❌</button>
+                    </div>
+                `;
+            });
+
+            cartItemsContainer.innerHTML = html;
+            cartTotal.textContent = 'EGP ' + total;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function checkoutToWhatsApp() {
+            if (cart.length === 0) {
+                alert("Your bag is empty!");
+                return;
+            }
+
+            let message = "Hello Velvet Beauty, I would like to order:%0A";
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                message += `%0A${index + 1}. ${item.name} - EGP ${item.price}`;
+                total += item.price;
+            });
+
+            message += `%0A%0A*Total: EGP ${total}*`;
+
+            let phoneNumber = "201147550067"; // اكتبي رقمك هنا
+            let whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
+</body>
+</html>
